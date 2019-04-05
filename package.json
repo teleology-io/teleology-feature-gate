@@ -1,0 +1,41 @@
+{
+  "name": "@teleology/feature-gate",
+  "version": "0.0.1",
+  "description": "A simple, percent based, sliding feature gate",
+  "main": "lib/index.js",
+  "files": [
+    "lib/*"
+  ],
+  "scripts": {
+    "prepublish": "yarn build",
+    "build": "tsc -p .",
+    "test": "jest"
+  },
+  "keywords": [
+    "feature",
+    "gate",
+    "percent",
+    "lerp",
+    "rollout",
+    "roll",
+    "out"
+  ],
+  "author": "Chris Sullivan",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^24.0.11",
+    "@types/uuid": "^3.4.4",
+    "jest": "^24.7.1",
+    "ts-jest": "^24.0.1",
+    "typescript": "^3.4.1",
+    "uuid": "^3.3.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/icarus-sullivan/teleology-feature-gate.git"
+  },
+  "bugs": {
+    "url": "https://github.com/icarus-sullivan/teleology-feature-gate/issues"
+  },
+  "homepage": "https://github.com/icarus-sullivan/teleology-feature-gate#readme"
+}
