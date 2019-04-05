@@ -17,6 +17,7 @@ Example:
 ```
 import featureGate from '@teleology/feature-gate';
 
+const uniqueId = '12345';
 const featurePercentages = {
   featureA: 10,
   featureB: 99,
@@ -24,10 +25,9 @@ const featurePercentages = {
 };
 
 const configuredGate = featureGate(featurePercentages);
+const canView = configuredGate('featureA', uniqueId);
 
-const userId = '12345';
-const canView = configuredGate('featureA', userId);
-console.log(canView); // false
+console.log(`Id ${uniqueId} ${canView ? 'can' : 'cannot'} view featureA`);
 ```
 
 ## Percentages
