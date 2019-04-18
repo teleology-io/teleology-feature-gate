@@ -2,11 +2,11 @@ import featureGate from '../';
 import ids from './data';
 
 const configuration = {
-  pageA: 30,
-  pageB: 95,
-  pageC: 50,
-  pageD: 99,
-  pageX: 10,
+  pageA: 0.30,
+  pageB: 0.95,
+  pageC: 0.50,
+  pageD: 0.99,
+  pageX: 1,
 };
  
 test('configure featureGate', () => {
@@ -41,5 +41,5 @@ test('pageD', () => {
 });
 
 test('pageX', () => {
-  expect(runFeature('pageX')).toEqual(0.0965);
+  expect(runFeature('pageX')).toEqual(1);
 });

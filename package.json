@@ -1,6 +1,6 @@
 {
   "name": "@teleology/feature-gate",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A simple, percent based, sliding feature gate",
   "main": "lib/index.js",
   "files": [

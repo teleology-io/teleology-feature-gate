@@ -13,55 +13,45 @@ yarn add @teleology/feature-gate
 ```
 
 ## Usage
-Example:
+To use the feature gate it needs to be seeded with configuration data. Configuration data entries in a key-value object. 
+
+**Example:**
+
 ```
 import featureGate from '@teleology/feature-gate';
 
-const uniqueId = '12345';
-const featurePercentages = {
-  featureA: 10,
-  featureB: 99,
-  featureX: 50,
-};
-
-const configuredGate = featureGate(featurePercentages);
-const canView = configuredGate('featureA', uniqueId);
-
-console.log(`Id ${uniqueId} ${canView ? 'can' : 'cannot'} view featureA`);
-```
-
-## Percentages
-Gated features are integer based, ranging from an inclusive 0-100. 
-- A missing feature 'key' always returns false
-- 0 percent will always return false
-- 100 percent will always return true
-
-Example:
-```
-const { default: featureGate } = require('@teleology/feature-gate');
-const assert = require('assert');
-
-const id = 'foo';
 const gate = featureGate({
-  hidden: 0,
-  shown: 100,
+  showPageA: 0.34,
+  showFeatureX: 0.45,
 });
-
-// missing feature 
-assert.equal(
-  gate('unknown', id),
-  false,
-);
-
-// 0 percent
-assert.equal(
-  gate('hidden', id),
-  false,
-);
-
-// 100 percent
-assert.equal(
-  gate('shown', id),
-  true,
-);
 ```
+
+Now that it is seeded we can test if a unique identifier can subscribe to that feature. 
+
+**Example:**
+
+```
+const userId = '12345';
+const canView = gate('showPageA', userId);
+if ( canView ) {
+    console.log('You can see page A!!');
+}
+```
+
+Most feature gates will be used in conjunction with a remote configuration system. This way devs can update gates on-the-fly.
+
+**Configuration-Based Example:**
+```
+import featureGate from '@teleology/feature-gate';
+import fetchConfig from 'util/configUtils';
+
+export default async () => featureGate( await fetchConfig() );
+```
+
+## How it works
+Most feature gates are used to opt-in a user or system. For these cases we want consistent, and non-storable conditions. That is why the feature and unique identifier are hashed, xor'd, and then modded in order to compute a percentile. If the result falls within the acceptable range the unique identifier is opted in. The following are exceptions to the computation. 
+- A missing feature 'key' always returns false
+- 0 will always return false
+- 1 or more will always return true
+
+
