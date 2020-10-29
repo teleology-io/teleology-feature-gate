@@ -1,7 +1,8 @@
 ![npm downloads total](https://img.shields.io/npm/dt/@teleology/feature-gate.svg) ![npm version](https://img.shields.io/npm/v/@teleology/feature-gate.svg) ![npm license](https://img.shields.io/npm/l/@teleology/feature-gate.svg)
 
 # @teleology/feature-gate
-A simple, configuration-based, boolean feature gate 
+
+As there are often various ways of doing things, this library can be used in three ways. Via boolean values, percentages, or array iteration. 
 
 ## Installation
 ```

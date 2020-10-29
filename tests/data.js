@@ -1,4 +1,3 @@
-
 export default [
   '1c708dd2-cab6-4199-8b5d-f74541c386b3',
   '82ea3c0d-3201-4157-aa3a-195fa33cb4c3',

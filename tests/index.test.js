@@ -1,28 +1,28 @@
-import featureGate from '../';
+import featureGate from '../src';
 import ids from './data';
 
 const configuration = {
-  pageA: 0.30,
+  pageA: 0.3,
   pageB: 0.95,
-  pageC: 0.50,
+  pageC: 0.5,
   pageD: 0.99,
   pageX: 1,
 };
- 
+
 test('configure featureGate', () => {
   const gate = featureGate(configuration);
   expect(gate).toBeDefined();
 });
 
-const runFeature = (feature: string): number => {
+const runFeature = (feature) => {
   const gate = featureGate(configuration);
-  const result: any = {};
+  const result = {};
   for (const id of ids) {
     result[id] = gate(feature, id);
   }
   const valid = Object.keys(result).filter((k) => result[k]);
   return valid.length / ids.length;
-}
+};
 
 test('pageA', () => {
   expect(runFeature('pageA')).toEqual(0.306);
