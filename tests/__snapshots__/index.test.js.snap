@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`A-B Testing 1`] = `
+Object {
+  "A": 1487,
+  "B": 1513,
+  "C": 1469,
+  "D": 1531,
+}
+`;

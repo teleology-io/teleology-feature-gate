@@ -4,7 +4,7 @@ import { pick } from './pick';
 
 const MAX_PERCENTAGE = 100;
 
-export default (config) => (path, uniqueId) => {
+module.exports = (config) => (path, uniqueId) => {
   const percentage = pick(config, path, false);
   if (typeof percentage === 'boolean') return percentage;
 
@@ -14,6 +14,7 @@ export default (config) => (path, uniqueId) => {
   // create a hash from unique and path
   const hash = xor(path, uniqueId);
 
+  // Get a value from the array 
   if (Array.isArray(percentage)) {
     const percentile = mod(hash, percentage.length);
     return percentage[percentile];
