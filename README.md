@@ -1,7 +1,8 @@
 ![npm downloads total](https://img.shields.io/npm/dt/@teleology/feature-gate.svg) ![npm version](https://img.shields.io/npm/v/@teleology/feature-gate.svg) ![npm license](https://img.shields.io/npm/l/@teleology/feature-gate.svg)
 
 # @teleology/feature-gate
-A simple, configuration-based, boolean feature gate 
+
+As there are often various ways of doing things, this library can be used in three ways. Boolean values, rolling values, or array iteration. The use of a secondary unique value as a param is used for consistency.
 
 ## Installation
 ```
@@ -13,45 +14,66 @@ yarn add @teleology/feature-gate
 ```
 
 ## Usage
-To use the feature gate it needs to be seeded with configuration data. Configuration data entries in a key-value object. 
+To use the feature gate it needs to be seeded with configuration data. Configuration data entries are defined as a key-value object. Referencing config objects are done with dot-notation. 
 
-**Example:**
+### Rolling Example
+---
+A rolling example is any value between 0-1 and can be increased to 'roll-out' features. The rollout is done via a hash of the path as well as the userId, meaning it is both consistent for userIds as well as scaleable. 
 
-```
-import featureGate from '@teleology/feature-gate';
+```javascript
+const factory = require('@teleology/feature-gate');
 
-const gate = featureGate({
-  showPageA: 0.34,
-  showFeatureX: 0.45,
+const USER_ID = 'DE5A50BC-08CE-47C4-B186-D6B29E710188';
+
+const gate = factory({
+  showNewWelcome: 0.34,
+  showNotifications: 1
 });
+
+gate('showNewWelcome', USER_ID) // false
 ```
 
-Now that it is seeded we can test if a unique identifier can subscribe to that feature. 
+### Boolean Example
+---
+If you know this value is going to be a boolean, you don't need a unique secondary param.
 
-**Example:**
+```javascript
+const factory = require('@teleology/feature-gate');
 
-```
-const userId = '12345';
-const canView = gate('showPageA', userId);
-if ( canView ) {
-    console.log('You can see page A!!');
-}
-```
+const USER_ID = 'DE5A50BC-08CE-47C4-B186-D6B29E710188';
 
-Most feature gates will be used in conjunction with a remote configuration system. This way devs can update gates on-the-fly.
+const gate = factory({
+  features: {
+    a: 0.12,
+    b: true
+  }
+});
 
-**Configuration-Based Example:**
-```
-import featureGate from '@teleology/feature-gate';
-import fetchConfig from 'util/configUtils';
-
-export default async () => featureGate( await fetchConfig() );
+gate('features.b', USER_ID); // true
 ```
 
-## How it works
-Most feature gates are used to opt-in a user or system. For these cases we want consistent, and non-storable conditions. That is why the feature and unique identifier are hashed, xor'd, and then modded in order to compute a percentile. If the result falls within the acceptable range the unique identifier is opted in. The following are exceptions to the computation. 
-- A missing feature 'key' always returns false
-- 0 will always return false
-- 1 or more will always return true
+### A-B(n) Testing Example
+---
+Using the same hashing function as the rolling gate, buckets certain users into an array of selections. 
 
+```javascript
+const factory = require('@teleology/feature-gate');
 
+const USER_ID = 'DE5A50BC-08CE-47C4-B186-D6B29E710188';
+
+const gate = factory({
+  welcome: {
+    screens: [
+      'A',
+      'B',
+      'C',
+      'D',
+    ]
+  },
+  theme: {
+    blue: '0000ff'
+  }
+});
+
+gate('welcome.screens', USER_ID); // 'A'
+```

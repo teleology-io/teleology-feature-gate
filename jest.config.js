@@ -1,17 +1,11 @@
 module.exports = {
-  "roots": [
-    "<rootDir>/src"
-  ],
-  "transform": {
-    "^.+\\.ts?$": "ts-jest"
+  verbose: true,
+  transform: {
+    '^.+\\.js$': 'babel-jest',
   },
-  "testRegex": "((\\.|/)(test|spec))\\.ts?$",
-  "moduleFileExtensions": [
-    "ts",
-    "tsx",
-    "js",
-    "jsx",
-    "json",
-    "node"
-  ],
-}
+  globals: {
+    NODE_ENV: 'test',
+  },
+  moduleFileExtensions: ['js'],
+  moduleDirectories: ['node_modules', 'src'],
+};

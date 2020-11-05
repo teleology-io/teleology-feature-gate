@@ -1,15 +1,17 @@
 {
   "name": "@teleology/feature-gate",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A simple, percent based, sliding feature gate",
   "main": "lib/index.js",
   "files": [
     "lib/*"
   ],
   "scripts": {
+    "prepare": "npx babel src --out-dir lib",
     "prepublish": "yarn build",
-    "build": "tsc -p .",
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "keywords": [
     "feature",
@@ -23,12 +25,25 @@
   "author": "Chris Sullivan",
   "license": "MIT",
   "devDependencies": {
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
     "@types/jest": "^24.0.11",
     "@types/uuid": "^3.4.4",
+    "babel-jest": "^26.6.1",
+    "eslint": "^7.6.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-config-teleology": "1.0.1",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-prettier": "^3.1.4",
     "jest": "^24.7.1",
+    "prettier": "^2.0.5",
     "ts-jest": "^24.0.1",
     "typescript": "^3.4.1",
-    "uuid": "^3.3.2"
+    "uuid": "^3.3.2",
+    "webpack": "^5.3.1",
+    "webpack-cli": "^4.1.0"
   },
   "repository": {
     "type": "git",
