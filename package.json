@@ -1,6 +1,6 @@
 {
   "name": "@teleology/feature-gate",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A simple, percent based, sliding feature gate",
   "main": "lib/index.js",
   "files": [
@@ -47,10 +47,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/icarus-sullivan/teleology-feature-gate.git"
+    "url": "git+https://github.com/teleology-io/teleology-feature-gate.git"
   },
   "bugs": {
-    "url": "https://github.com/icarus-sullivan/teleology-feature-gate/issues"
+    "url": "https://github.com/teleology-io/teleology-feature-gate/issues"
   },
-  "homepage": "https://github.com/icarus-sullivan/teleology-feature-gate#readme"
+  "homepage": "https://github.com/teleology-io/teleology-feature-gate#readme"
 }
